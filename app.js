@@ -17,6 +17,7 @@ var apiUsers = require('./routes/apiUsers');
 var apiArticles = require('./routes/apiArticles');
 var apiComments = require('./routes/apiComments');
 var apiEmails = require('./routes/apiEmails');
+var apiWeather = require('./routes/apiWeather');
 
 var app = express();
 app.all('*', function (req, res, next) {
@@ -44,6 +45,7 @@ app.use('/apiUsers', apiUsers);
 app.use('/apiArticles', apiArticles);
 app.use('/apiComments', apiComments);
 app.use('/apiEmails', apiEmails);
+app.use('/apiWeather', apiWeather);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -66,12 +66,11 @@ router.post('/mPassword', function (req, res) {
 
 })
 router.post('/mEmail', function (req, res) {
-    var jsonAlldata = req.body
-    var uid = jsonAlldata.uid;
-    var email = josnAlldata.email;
-    var findUser = {'_id': uid}
-    var findEmail={'email':email}
-    console.log(email)
+    var jsonAlldata = req.body,
+        uid=jsonAlldata.uid,
+        email=jsonAlldata.email,
+        findUser= {'_id': uid},
+        findEmail={'email':email};
     User.find(findEmail, function (err, res_email) {
         if (err) {
             console.log("Error:" + err);
@@ -85,7 +84,7 @@ router.post('/mEmail', function (req, res) {
                     } else {
                         if (res_user != '') {
                             User.update({'_id': uid},
-                                {'email': email},
+                                {'email': email,'activeStatus':false},
                                 function (err, u_user) {
                                     if (err) {
                                         console.log("Error:" + err);
