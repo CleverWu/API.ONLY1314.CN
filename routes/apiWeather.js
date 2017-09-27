@@ -7,7 +7,8 @@ router.post('/getWeather', function (req, res) {
   /*  var jsonAlldata=req.body*/
 
 
-    var ip=req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress||'125.71.132.213'
+ /*   var ip=req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress||'125.71.132.213'*/
+    var ip='125.71.132.213'
     console.log(ip)
     const UID = "U295BB6845"; // 测试用 用户ID，请更换成您自己的用户ID
     const KEY = "qds5rkfqvq3ckkw3"; // 测试用 key，请更换成您自己的 Key
