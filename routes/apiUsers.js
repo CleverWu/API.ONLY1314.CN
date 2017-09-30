@@ -14,17 +14,20 @@ router.post('/mUserPhoto', function (req, res) {
     var dataBuffer = new Buffer(base64, 'base64'); //把base64码转成buffer对象
     var date = new Date();
     var filename = String(date.getFullYear()) + String(date.getMonth() + 1) + String(date.getDate());
-    var imgSrc = '../usr/share/nginx/html/' + pic;
+    var imgSrc = '../../usr/static/' + pic;
+    console.log("imgSrc", imgSrc)
     /*  var path = './img/photo/' + filename + '/';
      var imgSrc = './img/photo/' + filename + '/' + Date.parse(date)+ '.png'*/
     fs.writeFileSync(imgSrc, dataBuffer)
     var findUser = {'_id': uid}
+
     User.find(findUser, function (err, res_user) {
         if (err) {
             console.log("Error:" + err);
         }
         else {
             if (res_user != '') {
+
                 return res.json(toJSON(res_user[0], '成功', '200', '0'))
             } else {
                 console.log('没找到')
@@ -67,10 +70,10 @@ router.post('/mPassword', function (req, res) {
 })
 router.post('/mEmail', function (req, res) {
     var jsonAlldata = req.body,
-        uid=jsonAlldata.uid,
-        email=jsonAlldata.email,
-        findUser= {'_id': uid},
-        findEmail={'email':email};
+        uid = jsonAlldata.uid,
+        email = jsonAlldata.email,
+        findUser = {'_id': uid},
+        findEmail = {'email': email};
     User.find(findEmail, function (err, res_email) {
         if (err) {
             console.log("Error:" + err);
@@ -84,13 +87,13 @@ router.post('/mEmail', function (req, res) {
                     } else {
                         if (res_user != '') {
                             User.update({'_id': uid},
-                                {'email': email,'activeStatus':false},
+                                {'email': email, 'activeStatus': false},
                                 function (err, u_user) {
                                     if (err) {
                                         console.log("Error:" + err);
                                     }
                                     else {
-                                        User.find(findUser,function (err,res_f_user) {
+                                        User.find(findUser, function (err, res_f_user) {
                                             return res.json(toJSON(res_f_user[0], '成功', '200', '0'))
                                         })
 
@@ -146,27 +149,20 @@ router.post('/regist', function (req, res) {
                             if (err) {
                                 console.log("Error")
                             } else {
-                                var
-                                    oldPath = '../usr/share/nginx/html/static/images/photo.png';
+                                var oldPath = '../usr/static/public/images/photo.png';
                                 var date = Date.parse(new Date())
-                                fs.mkdirSync
-                                ('../usr/share/nginx/html/images/User/' + ress._id + '/')
-                                var
-                                    newPath = '../usr/share/nginx/html/images/User/' + ress._id + '/' + ress._id + '_' + date + '.png'
+                                fs.mkdirSync('../../usr/static/images/User/' + ress._id + '/')
+                                var newPath = '../usr/static/images/User/' + ress._id + '/' + ress._id + '_' + date + '.png'
                                 copyFile(oldPath, newPath)
-                                User.update({'_id': ress._id},
-                                    {'userPhoto': 'https://only1314.cn/images/User/' + ress._id + '/' + ress._id + '_' + date + '.png'},
-                                    function (err, resss) {
-                                        if (err) {
-                                            console.log("Error:" + err);
-                                        }
-                                        else {
-
-                                            ress.userPhoto = 'https://only1314.cn/images/User/' + ress._id + '/' + ress._id + '_' + date + '.png';
-                                            return res.json(toJSON(ress, '成功', '200',
-                                                '0'))
-                                        }
-                                    })
+                                User.update({'_id': ress._id}, {'userPhoto': 'https://static.only1314.cn/images/User/' + ress._id + '/' + ress._id + '_' + date + '.png'}, function (err, resss) {
+                                    if (err) {
+                                        console.log("Error:" + err);
+                                    }
+                                    else {
+                                        ress.userPhoto = 'https://static.only1314.cn/images/User/' + ress._id + '/' + ress._id + '_' + date + '.png';
+                                        return res.json(toJSON(ress, '成功', '200', '0'))
+                                    }
+                                })
                             }
                         })
                     }

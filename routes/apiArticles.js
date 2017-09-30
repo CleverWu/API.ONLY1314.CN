@@ -42,8 +42,8 @@ router.post('/publish', function (req, res) {
                 var dataBuffer = new Buffer(base64, 'base64'); //把base64码转成buffer对象
                 var date = new Date();
                 var filename = String(date.getFullYear()) + String(date.getMonth() + 1) + String(date.getDate());
-                var path = '../usr/share/nginx/html/images/Article/' + filename + '/';
-                var imgSrc = '../usr/share/nginx/html/images/Article/' + filename + '/' + Date.parse(date) + i + '.png'
+                var path = '../usr/static/images/Article/' + filename + '/';
+                var imgSrc = '../usr/static/images/Article/' + filename + '/' + Date.parse(date) + i + '.png'
                 /* var path = './img/' + filename + '/';
                  var imgSrc = './img/' + filename + '/' + Date.parse(date) + i + '.png'*/
 
@@ -61,10 +61,10 @@ router.post('/publish', function (req, res) {
 // 批量导入文章=================发布需要修改路径
 router.post('/excelArticle', function (req, res) {
     var form = new formidable.IncomingForm();
-    form.uploadDir='../usr/share/nginx/html/upload/article/';
+    form.uploadDir='../usr/static/upload/article/';
     /*form.uploadDir='./public/upload/article/';*/
     /* var path='./public/upload/article/'*/
-    var path='../usr/share/nginx/html/upload/article/'
+    var path='../usr/static/upload/article/'
     form.parse(req, function (err, fields, files) {
         if (err) {
             console.log('文件上传错误！');

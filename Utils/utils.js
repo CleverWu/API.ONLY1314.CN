@@ -66,7 +66,7 @@ var utils={
                 address:rdata[1]||'暂无',
                 region: '互联网',
                 desc: rdata[2],
-                picArr: 'https://only1314.cn/static/images/s.jpg',
+                picArr: 'https://static.only1314.cn/public/images/s.jpg',
                 publishdate: new Date(),
                 replyNums: 0,
                 likeNums: 0,
@@ -90,7 +90,7 @@ var utils={
     */
     writeToFile:function(i, imgSrc, imgname, filename, dataBuffer, jsonAlldata, res,Article,toJSON) {
         fs.writeFileSync(imgSrc, dataBuffer)
-        jsonAlldata.picArr[i] = 'https://only1314.cn/images/Article/' + filename + '/' + imgname;
+        jsonAlldata.picArr[i] = 'https://static.only1314.cn/images/Article/' + filename + '/' + imgname;
         console.log(i, jsonAlldata.picArr.length)
         if (i == jsonAlldata.picArr.length - 1) {
             var newData = {
